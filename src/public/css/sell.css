@@ -1,0 +1,92 @@
+.sell-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    /* border: 1px solid #ddd;
+    border-radius: 8px; */
+    background-color: #fff;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.form-subtitle-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #666;
+}
+
+.hr-gray {
+    color: #ccc;
+    margin: 0px 0 20px 0;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-buttons {
+    text-align: center;
+}
+
+.submit-btn {
+    background-color: #ff5c5c;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #e04d4d;
+}
+
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-button {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 2px solid #e04d4d;
+    border-radius: 5px;
+    color: #e04d4d;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    background-color: #fff;
+}
+
+.category-button input[type="checkbox"] {
+    display: none;
+}
+
+.category-button input[type="checkbox"]:checked+* {
+    color: #fff;
+    background-color: #e04d4d;
+}
