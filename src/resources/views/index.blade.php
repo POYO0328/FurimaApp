@@ -18,12 +18,12 @@
 
 <div class="product__list">
   @foreach ($items as $item)
-  <div class="product__item">
-    <a href="{{ url('item/' . $item->id) }}">
-      <img src="{{ asset(ltrim($item->image_path, '/')) }}" alt="{{ $item->item_name }}" class="product__image">
-    </a>
-    <div class="product__name">{{ $item->item_name }}</div>
-  </div>
-@endforeach
+    <div class="product__item">
+      <a href="{{ url('item/' . $item->id) }}">
+        <img src="{{ asset(ltrim($item->image_path, '/')) }}" alt="{{ $item->item_name }}" class="product__image">
+      </a>
+      <div class="product__name">{{ $item->item_name }}</div>
+    </div>
+  @endforeach
 </div>
 @endsection

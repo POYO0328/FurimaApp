@@ -19,11 +19,11 @@
 
     <div style="display: flex; align-items: center; margin-bottom: 20px;">
       <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; background: #ddd;">
-        @if($user->profile_image_path)
-          <img src="{{ asset($user->profile_image_path) }}" alt="プロフィール画像" style="width: 100%; height: 100%; object-fit: cover;">
-        @else
-          <img src="/images/armani_watch.jpg" alt="デフォルト画像" style="width: 100%; height: 100%; object-fit: cover;">
-        @endif
+      @if($user->profile_image_path)
+        <img src="{{ asset($user->profile_image_path) }}" alt="プロフィール画像" style="width: 100%; height: 100%; object-fit: cover;">
+      @else
+        <img src="/images/onions.jpg" alt="デフォルト画像" style="width: 100%; height: 100%; object-fit: cover;">
+      @endif
       </div>
       <div style="margin-left: 20px;">
         <label for="profile_image">画像を選択</label><br>
@@ -70,7 +70,7 @@
       </div>
       <div class="form__group-content">
         <div class="form__input--text">
-          <input type="text" name="building_name" value="{{ old('building_name', $user->building_name) }}">
+          <input type="text" name="building" value="{{ old('building', $user->building) }}">
         </div>
       </div>
     </div>

@@ -24,11 +24,11 @@ use App\Http\Controllers\LikeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', [AuthController::class, 'index']);
+// Route::get('/', [AuthController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [AuthController::class, 'index']);
@@ -39,17 +39,17 @@ Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile
 Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 
-Route::get('/login-success', function () {
-    $user = auth()->user(); // ログイン中のユーザーを取得
+// Route::get('/login-success', function () {
+//     $user = auth()->user(); // ログイン中のユーザーを取得
 
-    if ($user && $user->first_login_flg) {
-        // 初回ログインならプロフィール編集画面へ
-        return redirect('/mypage/profile');
-    }
+//     if ($user && $user->first_login_flg) {
+//         // 初回ログインならプロフィール編集画面へ
+//         return redirect('/mypage/profile');
+//     }
 
-    // 通常ログインならマイページへ
-    return redirect('/');
-})->middleware('auth');
+//     // 通常ログインならマイページへ
+//     return redirect('/');
+// })->middleware('auth');
 
 Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
 
@@ -62,7 +62,8 @@ Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
 
 Route::get('/purchase/{item_id}', [PurchaseController::class, 'confirm'])->name('purchase.confirm');
 
-Route::post('/purchase/{item_id}/complete', [PurchaseController::class, 'complete'])->name('purchase.complete');
+// Route::post('/purchase/{item_id}/complete', [PurchaseController::class, 'complete'])->name('purchase.complete');
+Route::post('/purchase/complete/{item_id}', [PurchaseController::class, 'complete'])->name('purchase.complete');
 
 Route::get('/purchase/address/{item_id}', [PurchaseAddressController::class, 'showForm'])->name('purchase.address');
 Route::post('/purchase/address/{item_id}', [PurchaseAddressController::class, 'submitAddress'])->name('purchase.address.submit');
@@ -73,3 +74,5 @@ Route::post('/items/{item}/comments', [CommentController::class, 'store'])->name
 //いいね部分
 // Route::post('/like/{item_id}', [LikeController::class, 'store'])->name('like.store');
 Route::post('/like-toggle/{item_id}', [LikeController::class, 'toggle'])->name('like.toggle');
+
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

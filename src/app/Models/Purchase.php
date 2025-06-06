@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Purchase extends Model
 {
     use HasFactory;
+    
+    protected $fillable = ['user_id', 'item_id', 'payment_method'];
 
-    // もし fillable を指定したい場合（任意）
-    protected $fillable = ['category_name'];
 }

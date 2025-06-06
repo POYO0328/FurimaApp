@@ -29,6 +29,10 @@
     </div>
 
     <div class="purchase-right">
+        
+    <form action="{{ route('purchase.complete', ['item_id' => $item->id]) }}" method="post">
+    @csrf
+
         <table>
             <tr>
                 <td>商品代金</td>
@@ -36,13 +40,18 @@
             </tr>
             <tr>
                 <td>支払い方法</td>
-                <td>コンビニ払い</td> {{-- TODO: 選択内容を反映 --}}
+                <td>
+                    <select name="payment_method" required>
+                        <option disabled selected>選択してください</option>
+                        <option value="コンビニ払い">コンビニ払い</option>
+                        <option value="クレジットカード">クレジットカード</option>
+                    </select>
+                </td>
             </tr>
         </table>
-            <form action="{{ route('purchase.complete', ['item_id' => $item->id]) }}" method="post">
-                @csrf
-                <button type="submit" class="purchase-btn">購入する</button>
-            </form>
+
+        <button type="submit" class="purchase-btn">購入する</button>
+    </form>
     </div>
 </div>
 @endsection

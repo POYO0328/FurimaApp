@@ -46,11 +46,27 @@
 }
 
 .items-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-}
+    display: flex;
+    flex-wrap: wrap;
 
-.item-card {
-    text-align: center;
-}
+  }
+  
+  .item-card {
+    width: 200px;
+    text-align: left;
+    margin-left: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .item-card img {
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .item-card p {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  

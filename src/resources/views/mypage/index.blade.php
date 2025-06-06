@@ -13,8 +13,8 @@
     </div>
 
     <div class="tabs">
-        <span class="active">出品した商品</span>
-        <span>購入した商品</span> {{-- 後で実装 --}}
+        <a href="{{ url('/mypage?page=sell') }}" class="{{ $page === 'sell' ? 'active' : '' }}">出品した商品</a>
+        <a href="{{ url('/mypage?page=buy') }}" class="{{ $page === 'buy' ? 'active' : '' }}">購入した商品</a>
     </div>
 
     <div class="items-grid">

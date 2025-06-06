@@ -9,7 +9,7 @@ use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
-{
+{  
     public function show($id)
     {
         $item = Item::findOrFail($id);
