@@ -5,7 +5,7 @@
 }
 
 .item-image {
-    width: 300px;
+    width: 45%;
     text-align: center;
     padding: 20px;
     border-radius: 8px;
@@ -48,14 +48,27 @@
     font-size: 12px;
 }
 
-.icons {
+.like-count {
     margin-bottom: 10px;
+    margin-left: 29px;
+}
+
+.comment-count {
+    margin-bottom: 10px;
+    margin-left: 40px;
 }
 
 .icon {
     font-size: 20px;
     margin-right: 5px;
-    margin-left: 15px;
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.comment-icon {
+    font-size: 28px;
+    margin-right: 5px;
+    margin-left: 7px;
     cursor: pointer;
 }
 
@@ -100,7 +113,7 @@
     margin-bottom: 10px;
 }
 
-.avatar {
+.avatar-img {
     width: 40px;
     height: 40px;
     background-color: #ccc;
@@ -176,3 +189,30 @@
     font-size: 14px;
     color: #555;
 }
+
+.item-image-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .sold-triangle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 60px solid red;
+    border-right: 60px solid transparent;
+    z-index: 1;
+  }
+  
+  .sold-text {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    transform: rotate(-45deg);
+    z-index: 2;
+  }

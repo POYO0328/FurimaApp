@@ -85,3 +85,31 @@
   margin-left: 40px;
   margin-bottom: 10px;
 }
+
+.item-image-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .sold-triangle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 60px solid red;
+    border-right: 60px solid transparent;
+    z-index: 1;
+  }
+  
+  .sold-text {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    transform: rotate(-45deg);
+    z-index: 2;
+  }
+  

@@ -10,9 +10,15 @@
         @csrf
 
         <div class="form-group">
-            <label for="image">商品画像</label>
-            <input type="file" name="image" id="image">
-            {{-- 今後：画像プレビュー機能 --}}
+            <label for="image">商品画像</label><br>
+            
+            <label for="image" class="custom-file-upload">
+                画像を選択
+            </label>
+            
+            <input type="file" name="image" id="image" onchange="previewImage(event)">
+            <div id="file-name" style="margin-top: 5px; color: #555;"></div>
+            <div id="image-preview" style="margin-top: 10px;"></div>
         </div>
 
         <div class="form-subtitle-group">
@@ -21,24 +27,27 @@
         <hr class="hr-gray">
 
         <div class="form-group">
-            <label for="categories">カテゴリー</label>
+            <label for="category_id">カテゴリー</label>
             <div class="category-buttons">
                 @foreach($categories as $category)
-                    <label class="category-button">
-                        <input type="checkbox" name="categories[]" value="{{ $category->id }}">
+                    <input type="checkbox" name="category_id[]" value="{{ $category->id }}" id="category_{{ $category->id }}" class="category-checkbox">
+                    <label class="category-button" for="category_{{ $category->id }}">
                         {{ $category->category_name }}
                     </label>
                 @endforeach
             </div>
         </div>
 
+
+
         <div class="form-group">
             <label for="condition">商品の状態</label>
             <select name="condition" id="condition">
                 <option value="">選択してください</option>
-                <option value="新品">新品</option>
-                <option value="目立った傷なし">目立った傷なし</option>
-                <option value="やや傷あり">やや傷あり</option>
+                <option value="良好">良好</option>
+                <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
+                <option value="やや傷や汚れあり">やや傷や汚れあり</option>
+                <option value="状態が悪い">状態が悪い</option>
             </select>
         </div>
 
@@ -54,8 +63,8 @@
         </div>
 
         <div class="form-group">
-            <label for="item_name">ブランド名</label>
-            <input type="text" name="item_name" id="item_name" required>
+            <label for="brand">ブランド名</label>
+            <input type="text" name="brand" id="brand" required>
         </div>
 
         <div class="form-group">
@@ -65,7 +74,10 @@
 
         <div class="form-group">
             <label for="price">販売価格</label>
-            <input type="number" name="price" id="price" required>
+            <div class="price-input">
+                <span class="yen">¥</span>
+                <input type="number" name="price" id="price" required>
+            </div>
         </div>
 
         <div class="form-buttons">
@@ -74,3 +86,33 @@
     </form>
 </div>
 @endsection
+@push('scripts')
+<script>
+function previewImage(event) {
+    const preview = document.getElementById('image-preview');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    preview.innerHTML = ''; // 画像プレビューをクリア
+    fileNameDisplay.textContent = ''; // ファイル名表示をクリア
+
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+        // ファイル名を表示
+        fileNameDisplay.textContent = `選択されたファイル: ${file.name}`;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.maxWidth = '200px';
+            img.style.maxHeight = '200px';
+            img.style.border = '1px solid #ccc';
+            img.style.borderRadius = '8px';
+            img.style.marginTop = '10px';
+            preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+</script>
+@endpush

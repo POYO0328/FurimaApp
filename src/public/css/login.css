@@ -39,7 +39,6 @@
     height: 40px;
     border: 1px solid #ddd;
     border-radius: 3px;
-
     appearance: none;
 }
 
@@ -67,4 +66,34 @@
 
 .register__button-submit {
     text-decoration: none;
+}
+
+/* --------------------
+   タブレット対応（768px〜850px）
+--------------------- */
+@media screen and (max-width: 850px) and (min-width: 768px) {
+    .form {
+        width: 80%;
+    }
+
+    .login-form__content {
+        padding: 20px 10px;
+    }
+
+    .form__button-submit {
+        font-size: 14px;
+    }
+}
+
+/* --------------------
+   PCワイド対応（1400px〜1540px）
+--------------------- */
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .form {
+        width: 45%;
+    }
+
+    .login-form__content {
+        max-width: 1200px;
+    }
 }

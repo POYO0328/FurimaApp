@@ -90,3 +90,66 @@
     border-radius: 4px;
     cursor: pointer;
 }
+
+/* PC用（1400〜1540px）※ここは微調整程度でOK */
+@media screen and (max-width: 1540px) and (min-width: 1400px) {
+    .header__inner {
+      max-width: 95%;
+      padding: 0 20px;
+    }
+    .header-search-input {
+      width: 250px;
+    }
+  }
+  
+  /* タブレット用（768〜850px） */
+  @media screen and (max-width: 850px) and (min-width: 768px) {
+    .header__inner {
+      max-width: 100%;
+      padding: 10px 20px;
+      height: auto;
+    }
+  
+    .header-utilities {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  
+    /* ロゴ＋検索フォームをまとめて左寄せ */
+    .header__logo,
+    .header-search-form {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  
+    .header-search-form {
+      margin-left: 20px;
+    }
+  
+    .header-search-input {
+      width: 200px;
+    }
+  
+    /* ナビゲーションは右側にまとめる */
+    nav {
+      margin-top: 10px;
+    }
+  
+    .header-nav {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  
+    .header-nav__item {
+      margin-right: 0;
+    }
+  }
+  
+
+  

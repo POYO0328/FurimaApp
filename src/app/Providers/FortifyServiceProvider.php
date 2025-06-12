@@ -22,7 +22,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        
     }
 
     /**
@@ -58,11 +58,11 @@ class FortifyServiceProvider extends ServiceProvider
 
     $user = Auth::user();
 
-    if ($user->first_login_flg) {
-        Session::put('after_login_redirect', route('profile.edit'));
-    } else {
-        Session::put('after_login_redirect', '/');
-    }
+    // if ($user->first_login_flg) {
+    //     Session::put('after_login_redirect', route('profile.edit'));
+    // } else {
+    //     Session::put('after_login_redirect', '/');
+    // }
 
     return $user;
 });

@@ -21,8 +21,8 @@
         <nav>
           <ul class="header-nav">
           <li class="header-serch">
-              <form action="/search" method="GET" class="header-search-form">
-                  <input type="text" name="keyword" class="header-search-input" placeholder="なにをお探しですか？">
+              <form action="/" method="GET" class="header-search-form">
+                  <input type="text" name="keyword" class="header-search-input" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
                   <button type="submit" class="header-search-button">🔍</button>
               </form>
           </li>
@@ -51,6 +51,7 @@
   <main>
     @yield('content')
   </main>
+  @stack('scripts')
 </body>
 
 </html>

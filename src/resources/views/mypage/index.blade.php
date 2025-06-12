@@ -21,7 +21,13 @@
         @if(isset($items) && $items->count())
             @foreach ($items as $item)
                 <div class="item-card">
-                    <img src="{{ asset($item->image_path) }}" alt="{{ $item->item_name }}">
+                    <div class="item-image-wrapper">
+                        <img src="{{ asset($item->image_path) }}" alt="{{ $item->item_name }}">
+                        @if($item->is_sold)
+                        <div class="sold-triangle"></div>
+                        <div class="sold-text">SOLD</div>
+                        @endif
+                    </div>
                     <p>{{ $item->item_name }}</p>
                 </div>
             @endforeach

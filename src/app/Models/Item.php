@@ -16,8 +16,37 @@ class Item extends Model
         'condition',
         'description',
         'image_path',
+        'user_id',
+        'category_id',
     ];
 
-    // 必要に応じてテーブル名を指定（items なら不要）
-    // protected $table = 'items';
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
+    public function getIsSoldAttribute()
+    {
+        return $this->purchases()->exists(); // 購入レコードがあれば sold と判定
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(\App\Models\Like::class, 'items_id');
+    }
+
+    // public function categories()
+    // {
+    //     return $this->belongsToMany(Category::class, 'category_item', 'item_id', 'category_id');
+    // }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

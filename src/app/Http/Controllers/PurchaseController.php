@@ -33,4 +33,18 @@ class PurchaseController extends Controller
 
         return view('item.purchase', compact('item', 'user', 'item_id'));
     }
+
+    public function show($item_id)
+    {
+        $item = Item::findOrFail($item_id);
+        $user = Auth::user();
+
+        // セッションに住所があればそちらを優先
+        $addressData = session('purchase_address');
+        $postalCode = $addressData['postal_code'] ?? $user->postal_code;
+        $address = $addressData['address'] ?? $user->address;
+        $building = $addressData['building'] ?? $user->building;
+
+        return view('item.purchase', compact('item', 'postalCode', 'address', 'building', 'user'));
+    }
 }

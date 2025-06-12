@@ -11,6 +11,8 @@ use App\Http\Controllers\PurchaseAddressController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Auth\RegisterController;
 
 
 /*
@@ -56,11 +58,11 @@ Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
 Route::get('/sell', [SellController::class, 'showForm'])->name('sell.form');
 
 // 保存処理用ルート
-Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
+Route::post('/sell', [ItemController::class, 'store'])->middleware('auth')->name('item.store');
 
 Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
 
-Route::get('/purchase/{item_id}', [PurchaseController::class, 'confirm'])->name('purchase.confirm');
+// Route::get('/purchase/{item_id}', [PurchaseController::class, 'confirm'])->name('purchase.confirm');
 
 // Route::post('/purchase/{item_id}/complete', [PurchaseController::class, 'complete'])->name('purchase.complete');
 Route::post('/purchase/complete/{item_id}', [PurchaseController::class, 'complete'])->name('purchase.complete');
@@ -76,3 +78,13 @@ Route::post('/items/{item}/comments', [CommentController::class, 'store'])->name
 Route::post('/like-toggle/{item_id}', [LikeController::class, 'toggle'])->name('like.toggle');
 
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::get('/', [ItemController::class, 'index']);
+
+use App\Http\Controllers\Auth\RegisteredUserController;
+
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
+Route::get('/purchase/{item_id}/address', [PurchaseAddressController::class, 'showForm'])->name('purchase.address');
+Route::post('/purchase/{item_id}/address', [PurchaseAddressController::class, 'submitAddress'])->name('purchase.address.submit');

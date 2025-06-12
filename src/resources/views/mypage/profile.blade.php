@@ -18,16 +18,17 @@
     @csrf
 
     <div style="display: flex; align-items: center; margin-bottom: 20px;">
-      <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; background: #ddd;">
-      @if($user->profile_image_path)
-        <img src="{{ asset($user->profile_image_path) }}" alt="プロフィール画像" style="width: 100%; height: 100%; object-fit: cover;">
-      @else
-        <img src="/images/onions.jpg" alt="デフォルト画像" style="width: 100%; height: 100%; object-fit: cover;">
-      @endif
+      <div class="profile-image-wrapper">
+        <img
+          id="current-profile-image"
+          src="{{ $user->profile_image_path ? asset($user->profile_image_path) : asset('/images/onions.jpg') }}"
+          alt="プロフィール画像"
+        >
       </div>
       <div style="margin-left: 20px;">
-        <label for="profile_image">画像を選択</label><br>
-        <input type="file" name="profile_image" id="profile_image">
+        <label for="profile_image" class="custom-file-upload">画像を選択</label>
+        <input type="file" name="profile_image" id="profile_image" onchange="previewImage(event)">
+        <div id="file-name" class="file-name"></div>
       </div>
     </div>
 
@@ -80,4 +81,24 @@
     </div>
   </form>
 </div>
+
+<script>
+function previewImage(event) {
+  const file = event.target.files[0];
+  const previewImage = document.getElementById('current-profile-image');
+  const fileNameDisplay = document.getElementById('file-name');
+
+  fileNameDisplay.textContent = '';
+
+  if (file && file.type.startsWith('image/')) {
+    fileNameDisplay.textContent = `選択されたファイル: ${file.name}`;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      previewImage.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+</script>
 @endsection

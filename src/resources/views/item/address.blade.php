@@ -6,35 +6,52 @@
 <div class="address-form__content">
     <h1 class="address-form__heading">住所の変更</h1>
 
-    <form method="POST" action="{{ route('purchase.address.submit', ['item_id' => $item_id]) }}" class="address-form">
+    @if(session('success'))
+        <div style="color: green;">{{ session('success') }}</div>
+    @endif
+
+    <form method="POST" action="{{ route('purchase.address.submit', ['item_id' => $item_id]) }}" class="address-form" enctype="multipart/form-data">
         @csrf
 
-        <div class="form__group">
-            <div class="form__group-title">
-                <label for="address" class="form__label--item">住所</label>
-            </div>
-            <div class="form__input--text">
-                <input type="text" name="address" id="address" value="{{ old('address') }}" required>
-            </div>
-        </div>
-
-        <div class="form__group">
-            <div class="form__group-title">
-                <label for="city" class="form__label--item">市区町村</label>
-            </div>
-            <div class="form__input--text">
-                <input type="text" name="city" id="city" value="{{ old('city') }}" required>
-            </div>
-        </div>
+        @php
+            $sessionAddress = session('purchase_address');
+            $user = Auth::user();
+        @endphp
 
         <div class="form__group">
             <div class="form__group-title">
                 <label for="postal_code" class="form__label--item">郵便番号</label>
             </div>
             <div class="form__input--text">
-                <input type="text" name="postal_code" id="postal_code" value="{{ old('postal_code') }}" required>
+                <input type="text" name="postal_code" id="postal_code"
+                    value="{{ old('postal_code', $sessionAddress['postal_code'] ?? $user->postal_code) }}"
+                    required>
             </div>
         </div>
+
+        <div class="form__group">
+            <div class="form__group-title">
+                <label for="address" class="form__label--item">住所</label>
+            </div>
+            <div class="form__input--text">
+                <input type="text" name="address" id="address"
+                    value="{{ old('address', $sessionAddress['address'] ?? $user->address) }}"
+                    required>
+            </div>
+        </div>
+
+        <div class="form__group">
+            <div class="form__group-title">
+                <span class="form__label--item">建物名</span>
+            </div>
+            <div class="form__group-content">
+                <div class="form__input--text">
+                    <input type="text" name="building"
+                        value="{{ old('building', $sessionAddress['building'] ?? $user->building) }}">
+                </div>
+            </div>
+        </div>
+
 
         <div class="form__button">
             <button type="submit" class="form__button-submit">次へ（確認画面）</button>
