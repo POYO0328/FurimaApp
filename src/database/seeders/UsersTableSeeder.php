@@ -12,7 +12,8 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                ## 仕様
+                'name' => '山田 太郎',
+                'email' => 'yamada@example.com',
             ],
             [
                 'name' => '佐藤 花子',
@@ -29,7 +30,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => '高橋 健太',
                 'email' => 'takahashi@example.com',
-            ],
+            ]
         ];
 
         foreach ($users as $user) {
