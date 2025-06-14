@@ -14,6 +14,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 
 /*
@@ -27,67 +28,43 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-// Route::get('/', [AuthController::class, 'index']);
+Route::get('/', [AuthController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [AuthController::class, 'index']);
+    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
+
+    Route::get('/sell', [SellController::class, 'showForm'])->name('sell.form');
+
+    Route::get('/sell', [SellController::class, 'showForm'])->name('sell.form');
+
+    Route::get('/purchase/address/{item_id}', [PurchaseAddressController::class, 'showForm'])->name('purchase.address');
+
+    Route::post('/purchase/address/{item_id}', [PurchaseAddressController::class, 'submitAddress'])->name('purchase.address.submit');
+
+    // 保存処理用ルート
+    Route::post('/sell', [ItemController::class, 'store'])->middleware('auth')->name('item.store');
+
+    Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
 });
-
-// ログイン後リダイレクト制御
-Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
-
-
-// Route::get('/login-success', function () {
-//     $user = auth()->user(); // ログイン中のユーザーを取得
-
-//     if ($user && $user->first_login_flg) {
-//         // 初回ログインならプロフィール編集画面へ
-//         return redirect('/mypage/profile');
-//     }
-
-//     // 通常ログインならマイページへ
-//     return redirect('/');
-// })->middleware('auth');
 
 Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
 
-Route::get('/sell', [SellController::class, 'showForm'])->name('sell.form');
-
-// 保存処理用ルート
-Route::post('/sell', [ItemController::class, 'store'])->middleware('auth')->name('item.store');
-
-Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
-
-// Route::get('/purchase/{item_id}', [PurchaseController::class, 'confirm'])->name('purchase.confirm');
-
-// Route::post('/purchase/{item_id}/complete', [PurchaseController::class, 'complete'])->name('purchase.complete');
 Route::post('/purchase/complete/{item_id}', [PurchaseController::class, 'complete'])->name('purchase.complete');
-
-Route::get('/purchase/address/{item_id}', [PurchaseAddressController::class, 'showForm'])->name('purchase.address');
-Route::post('/purchase/address/{item_id}', [PurchaseAddressController::class, 'submitAddress'])->name('purchase.address.submit');
 
 //コメント部分
 Route::post('/items/{item}/comments', [CommentController::class, 'store'])->name('comment.store');
 
-//いいね部分
-// Route::post('/like/{item_id}', [LikeController::class, 'store'])->name('like.store');
 Route::post('/like-toggle/{item_id}', [LikeController::class, 'toggle'])->name('like.toggle');
 
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-Route::get('/', [ItemController::class, 'index']);
-
-use App\Http\Controllers\Auth\RegisteredUserController;
-
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
-Route::get('/purchase/{item_id}/address', [PurchaseAddressController::class, 'showForm'])->name('purchase.address');
-Route::post('/purchase/{item_id}/address', [PurchaseAddressController::class, 'submitAddress'])->name('purchase.address.submit');
+
 
 Route::post('/stripe/create-checkout-session', [\App\Http\Controllers\StripeController::class, 'create']);

@@ -16,7 +16,7 @@ class PurchaseFactory extends Factory
         return [
             'user_id' => User::factory(),
             'item_id' => Item::factory(),
-            'payment_method' => $this->faker->randomElement(['コンビニ払い', 'カード支払い']),
+            'payment_method' => $this->faker->randomElement(['コンビニ支払い', 'カード支払い']),
         ];
     }
 }

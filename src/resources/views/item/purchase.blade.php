@@ -14,7 +14,7 @@
         <h4>支払い方法</h4>
         <select name="payment_method_left" id="payment_method_left" required>
             <option disabled selected>選択してください</option>
-            <option value="コンビニ払い">コンビニ払い</option>
+            <option value="コンビニ支払い">コンビニ支払い</option>
             <option value="カード支払い">カード支払い</option>
         </select>
 

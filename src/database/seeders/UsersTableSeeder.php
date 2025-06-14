@@ -12,8 +12,7 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'name' => '山田 太郎',
-                'email' => 'yamada@example.com',
+                ## 仕様
             ],
             [
                 'name' => '佐藤 花子',

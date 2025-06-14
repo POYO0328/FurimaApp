@@ -19,7 +19,7 @@ class PaymentMethodTest extends TestCase
         $item = Item::factory()->create();
 
         $response = $this->post(route('purchase.complete', ['item_id' => $item->id]), [
-            'payment_method' => 'コンビニ払い',
+            'payment_method' => 'コンビニ支払い',
             // 他に必要なフォームデータをここに書く
         ]);
 
@@ -28,7 +28,7 @@ class PaymentMethodTest extends TestCase
         $this->assertDatabaseHas('purchases', [
             'user_id' => $user->id,
             'item_id' => $item->id,
-            'payment_method' => 'コンビニ払い',
+            'payment_method' => 'コンビニ支払い',
         ]);
     }
 }

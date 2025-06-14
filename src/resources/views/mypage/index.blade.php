@@ -38,7 +38,7 @@
 </div>
 @endsection
 @push('scripts')
-    @if (session('payment_method') === 'カード支払い')
+    @if (session('payment_method') === 'カード支払い' || session('payment_method') === 'コンビニ支払い')
         <script src="https://js.stripe.com/v3/"></script>
         <script>
     document.addEventListener('DOMContentLoaded', async function () {

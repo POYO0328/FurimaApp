@@ -34,7 +34,7 @@
             <div class="form__input--text">
                 <input type="text" name="postal_code" id="postal_code"
                     value="{{ old('postal_code', $sessionAddress['postal_code'] ?? $user->postal_code) }}"
-                    required>
+                    >
             </div>
         </div>
 
@@ -45,7 +45,7 @@
             <div class="form__input--text">
                 <input type="text" name="address" id="address"
                     value="{{ old('address', $sessionAddress['address'] ?? $user->address) }}"
-                    required>
+                    >
             </div>
         </div>
 
