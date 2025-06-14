@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ProfileRequest;
+
 
 class ProfileController extends Controller
 {
@@ -13,17 +15,10 @@ class ProfileController extends Controller
         return view('mypage.profile', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
         $user = Auth::user();
-
-        $validated = $request->validate([
-            'name'          => 'required|string|max:255',
-            'postal_code'   => 'nullable|string|max:20',
-            'address'       => 'nullable|string|max:255',
-            'building'      => 'nullable|string|max:255',
-            'profile_image' => 'nullable|image|max:2048',
-        ]);
+        $validated = $request->validated();
 
         if ($request->hasFile('profile_image')) {
             $file = $request->file('profile_image');

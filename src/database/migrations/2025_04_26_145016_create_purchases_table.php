@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->string('shipping_address', 255);
             $table->string('shipping_building', 255)->nullable();
             $table->string('payment_method', 20); // コンビニ払い or カード払い
-            $table->timestamp('purchased_at')->nullable();
+            $table->timestamps();
         });
     }
 

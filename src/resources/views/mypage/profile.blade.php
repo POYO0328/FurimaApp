@@ -10,12 +10,21 @@
     <h2>プロフィール設定</h2>
   </div>
 
-  @if(session('success'))
-    <div style="color: green;">{{ session('success') }}</div>
-  @endif
-
   <form class="form" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
     @csrf
+    @if(session('success'))
+    <div style="
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    ">
+        {{ session('success') }}
+    </div>
+    @endif
 
     <div style="display: flex; align-items: center; margin-bottom: 20px;">
       <div class="profile-image-wrapper">
@@ -31,6 +40,16 @@
         <div id="file-name" class="file-name"></div>
       </div>
     </div>
+    @if ($errors->any())
+        <div style="background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <ul style="margin: 0; padding-left: 20px;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 
     <div class="form__group">
       <div class="form__group-title">
@@ -38,7 +57,7 @@
       </div>
       <div class="form__group-content">
         <div class="form__input--text">
-          <input type="text" name="name" value="{{ old('name', $user->name) }}" required>
+          <input type="text" name="name" value="{{ old('name', $user->name) }}" >
         </div>
       </div>
     </div>

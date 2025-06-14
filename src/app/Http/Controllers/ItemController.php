@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+use App\Http\Requests\ExhibitionRequest;
 
 class ItemController extends Controller
 {  
@@ -75,34 +76,34 @@ class ItemController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ExhibitionRequest $request)
     {
-        $validated = $request->validate([
-            'item_name'   => 'required|string|max:255',
-            'price'       => 'required|integer|min:0',
-            'brand'       => 'nullable|string|max:255',
-            'condition'   => 'required|string',
-            'description' => 'nullable|string',
-            'image'       => 'nullable|image|max:2048',
-            'category_id' => 'required|array',
-            'category_id.*' => 'exists:categories,id',
-        ]);
+        $validated = $request->validated();
 
         // 画像処理
         if ($request->hasFile('image')) {
-            // ランダムなファイル名で保存（storage/app/public/images）
             $path = $request->file('image')->store('images', 'public');
-
-            // パスをstorageから始まる形にして保存（表示用）
             $validated['image_path'] = 'storage/' . $path;
         }
 
-        $validated['user_id'] = auth()->id();
-        $validated['category_id'] = implode(',', $validated['category_id']);
+        if (is_array($validated['category_id'])) {
+            $validated['category_id'] = implode(',', $validated['category_id']);
+        }
 
-        $item = Item::create($validated);
+        // 必要に応じてカラム名を修正してください
+        $itemData = [
+            'item_name'        => $validated['item_name'],
+            'description'      => $validated['description'],
+            'image_path'       => $validated['image_path'] ?? null,
+            'brand'            => $validated['brand'],
+            'category_id'      => $validated['category_id'],
+            'condition'        => $validated['condition'],
+            'price'            => $validated['price'],
+            'user_id'          => auth()->id(),
+        ];
+
+        Item::create($itemData);
 
         return redirect('/mypage')->with('success', '商品を出品しました！');
     }
-
 }

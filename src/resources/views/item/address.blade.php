@@ -9,6 +9,15 @@
     @if(session('success'))
         <div style="color: green;">{{ session('success') }}</div>
     @endif
+    @if ($errors->any())
+        <div style="background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <ul style="margin: 0; padding-left: 20px;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('purchase.address.submit', ['item_id' => $item_id]) }}" class="address-form" enctype="multipart/form-data">
         @csrf

@@ -1,9 +1,8 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AddressRequest;
 
 class PurchaseAddressController extends Controller
 {
@@ -12,23 +11,21 @@ class PurchaseAddressController extends Controller
         return view('item.address', compact('item_id'));
     }
 
-    public function submitAddress(Request $request, $item_id)
+    // RequestをAddressRequestに差し替え
+    public function submitAddress(AddressRequest $request, $item_id)
     {
-        $request->validate([
-            'postal_code' => 'required|string|max:10',
-            'address' => 'required|string|max:255',
-            'building' => 'nullable|string|max:255',
-        ]);
+        // バリデーション済みデータを取得
+        $validated = $request->validated();
 
+        // セッションに保存
         session([
             'purchase_address' => [
-                'postal_code' => $request->postal_code,
-                'address' => $request->address,
-                'building' => $request->building,
+                'postal_code' => $validated['postal_code'],
+                'address' => $validated['address'],
+                'building' => $validated['building'] ?? null,
             ]
         ]);
 
         return redirect()->route('purchase.show', ['item_id' => $item_id]);
     }
 }
-

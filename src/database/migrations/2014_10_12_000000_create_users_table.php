@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('postal_code', 10)->nullable();
             $table->string('address', 255)->nullable();
             $table->string('building', 255)->nullable();
-            $table->boolean('first_login_flg')->default(true);
             $table->timestamps(); // created_at / updated_at
         });
     }

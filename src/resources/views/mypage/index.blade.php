@@ -37,3 +37,38 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+    @if (session('payment_method') === 'カード支払い')
+        <script src="https://js.stripe.com/v3/"></script>
+        <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        const stripeKey = "{{ config('services.stripe.key') }}";
+        console.log('Stripeキー:', stripeKey);
+        const stripeInstance = Stripe(stripeKey); // ← 変数名を変更
+
+        const response = await fetch("/stripe/create-checkout-session", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({
+                item_id: "{{ session('purchased_item_id') }}"
+            })
+        });
+
+        const session = await response.json();
+
+        const result = await stripeInstance.redirectToCheckout({
+            sessionId: session.id
+        });
+
+        if (result.error) {
+            alert("Stripe起動エラー: " + result.error.message);
+        }
+    });
+</script>
+
+    @endif
+@endpush
+

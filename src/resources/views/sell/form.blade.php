@@ -8,14 +8,23 @@
 
     <form action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @if ($errors->any())
+            <div style="background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                <ul style="margin: 0; padding-left: 20px;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <div class="form-group">
             <label for="image">商品画像</label><br>
-            
+
             <label for="image" class="custom-file-upload">
                 画像を選択
             </label>
-            
+
             <input type="file" name="image" id="image" onchange="previewImage(event)">
             <div id="file-name" style="margin-top: 5px; color: #555;"></div>
             <div id="image-preview" style="margin-top: 10px;"></div>
@@ -38,8 +47,6 @@
             </div>
         </div>
 
-
-
         <div class="form-group">
             <label for="condition">商品の状態</label>
             <select name="condition" id="condition">
@@ -59,12 +66,12 @@
 
         <div class="form-group">
             <label for="item_name">商品名</label>
-            <input type="text" name="item_name" id="item_name" required>
+            <input type="text" name="item_name" id="item_name" >
         </div>
 
         <div class="form-group">
             <label for="brand">ブランド名</label>
-            <input type="text" name="brand" id="brand" required>
+            <input type="text" name="brand" id="brand" >
         </div>
 
         <div class="form-group">
@@ -76,7 +83,7 @@
             <label for="price">販売価格</label>
             <div class="price-input">
                 <span class="yen">¥</span>
-                <input type="number" name="price" id="price" required>
+                <input type="number" name="price" id="price" >
             </div>
         </div>
 

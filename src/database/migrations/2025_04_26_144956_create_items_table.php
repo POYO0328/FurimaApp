@@ -22,7 +22,7 @@ class CreateItemsTable extends Migration
             $table->string('condition', 20)->nullable();
             $table->integer('price');
             $table->string('image_path', 255)->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('category_id')->nullable();
             $table->timestamps();
         });
     }

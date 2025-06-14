@@ -12,6 +12,7 @@ use App\Http\Controllers\SellController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
@@ -88,3 +89,5 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
 Route::get('/purchase/{item_id}/address', [PurchaseAddressController::class, 'showForm'])->name('purchase.address');
 Route::post('/purchase/{item_id}/address', [PurchaseAddressController::class, 'submitAddress'])->name('purchase.address.submit');
+
+Route::post('/stripe/create-checkout-session', [\App\Http\Controllers\StripeController::class, 'create']);

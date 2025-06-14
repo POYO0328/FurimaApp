@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_image_path'
     ];
 
     /**
@@ -46,4 +47,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Like::class);
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class); // 出品した商品一覧
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class); // 購入履歴
+    }
+
+    public function purchasedItems()
+    {
+        return $this->belongsToMany(Item::class, 'purchases', 'user_id', 'item_id');
+    }
+
 }

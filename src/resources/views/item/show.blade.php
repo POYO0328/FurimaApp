@@ -96,6 +96,15 @@
         </div>
 
         <div class="section">
+            @if ($errors->any())
+                <div style="background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    <ul style="margin: 0; padding-left: 20px;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="section-comment-title">商品へのコメント</div>
             @auth
                 <form action="{{ route('comment.store', ['item' => $item->id]) }}" method="POST">

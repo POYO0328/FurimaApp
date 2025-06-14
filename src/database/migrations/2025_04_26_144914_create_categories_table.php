@@ -14,8 +14,8 @@ return new class extends Migration {
     }
 
     public function down(): void {
-           Schema::disableForeignKeyConstraints(); // 追加
-    Schema::dropIfExists('categories');
-    Schema::enableForeignKeyConstraints(); // 追加
+        Schema::disableForeignKeyConstraints(); // 追加
+        Schema::dropIfExists('categories');
+        Schema::enableForeignKeyConstraints(); // 追加
     }
 };

@@ -6,14 +6,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Models\Purchase;
+use App\Http\Requests\PurchaseRequest;
 
 class PurchaseController extends Controller
 {
-    public function complete(Request $request, $item_id)
+    public function complete(PurchaseRequest $request, $item_id)
     {
-        $request->validate([
-            'payment_method' => 'required|string|in:コンビニ払い,クレジットカード',
-        ]);
 
         $user = Auth::user();
 
@@ -21,9 +19,15 @@ class PurchaseController extends Controller
             'user_id' => $user->id,
             'item_id' => $item_id,
             'payment_method' => $request->payment_method,
+            'shipping_postal_code' => $request->shipping_postal_code,
+            'shipping_address' => $request->shipping_address,
+            'shipping_building' => $request->shipping_building,
         ]);
 
-        return redirect('/mypage?page=buy')->with('success', '購入が完了しました');
+        return redirect('/mypage?page=buy')
+        ->with('success', '購入が完了しました')
+        ->with('payment_method', $request->payment_method)
+        ->with('purchased_item_id', $item_id);
     }
 
     public function confirm($item_id)

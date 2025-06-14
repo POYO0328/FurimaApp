@@ -15,12 +15,21 @@
         <select name="payment_method_left" id="payment_method_left" required>
             <option disabled selected>選択してください</option>
             <option value="コンビニ払い">コンビニ払い</option>
-            <option value="クレジットカード">カード払い</option>
+            <option value="カード支払い">カード支払い</option>
         </select>
 
         <hr>
 
         <div class="shipping-info">
+        @if ($errors->any())
+            <div style="background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                <ul style="margin: 0; padding-left: 20px;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
             <h4>配送先</h4>
             <p>〒 {{ $postalCode ?? '---' }}</p>
             <p>{{ $address ?? '---' }}</p>
@@ -34,6 +43,9 @@
     <form action="{{ route('purchase.complete', ['item_id' => $item->id]) }}" method="post">
     @csrf
     <input type="hidden" name="payment_method" id="payment_method">
+    <input type="hidden" name="shipping_postal_code" value="{{ $postalCode }}">
+    <input type="hidden" name="shipping_address" value="{{ $address }}">
+    <input type="hidden" name="shipping_building" value="{{ $building }}">
 
     <table>
         <tr>
