@@ -1,64 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# フリマアプリ
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 環境構築
 
-## About Laravel
+- Docker ビルド
+  1.git clone git@github.com:POYO0328/FurimaApp.git
+  2.docker-compose up -d -buld
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+\*MySQL は、OS によって起動しない場合があるのでそれぞれの PC に合わせて docker-compose.yml ファイルを編集してください。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Laravel 環境構築
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. docker-composer exec php bash
+2. composer install
+3. envexample ファイルから.env を作成し、環境変数を変更
+4. php artisan key:generate
+5. php artisan migrate
+6. php artisan db:seed
+7. composer require stripe/stripe-php
+8. .env ファイル内に STRIPE_SECRET_KEY=（Stripeの管理画面から取得したキー）
+   STRIPE_PUBLIC_KEY=pk_test_51RZd2P2Y9mjawEBNaoGKz6Ko6oP4BFTP9vn7B2LMMpDTVKcujVHngdvd5PcW4RCqftfpqRixLPsOpAjWp6LPNSW000v92w3X51
+   がなければ、追加する
 
-## Learning Laravel
+## 使用技術
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+・PHP 8.4.3
+・Laravel 8.83.8
+・MySQL 8.0
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ER 図
 
-## Laravel Sponsors
+![alt text](ER図.jpg)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## URL
 
-### Premium Partners
+・開発環境：http://localhost/
+・phpMyAdmin：http://localhost:8080/
+・Stripe：https://checkout.stripe.com/c/pay/cs_test...
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## 仕様
 
-## Contributing
+1. マイページの出品一覧、購入一覧からは詳細ページは開かない仕様です
+2. 検索機能を使って検索した後、再度おすすめ押下で検索ワードはリセットされる仕様です
+3. Spriteは、試験内容で接続すると記載がありましたので接続のみ実装しております。※そのあとの動きは未実装です。
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## テストユーザー/データ
+1. 'name' => '山田 太郎',
+   'email' => 'yamada@example.com'
 
-## Code of Conduct
+2. 'name' => '佐藤 花子',
+   'email' => 'sato@example.com'
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. 'name' => '鈴木 次郎',
+   'email' => 'suzuki@example.com'
 
-## Security Vulnerabilities
+4. 'name' => '田中 美咲',
+   'email' => 'tanaka@example.com'
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. 'name' => '高橋 健太',
+   'email' => 'takahashi@example.com'
 
-## License
+全員のパスワード：password
+一人２つずつ出品しており、計１０個の商品が最初出品されています
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## テストコード
+1. 会員登録機能　
+2. ログイン機能　
+3. ログアウト　php artisan test --filter=LogoutTest
+4. 商品一覧取得　
+5. マイリスト一覧取得
+6. 商品検索機能　php artisan test --filter=ProductSearchTest
+7. 商品詳細情報取得　
+8. いいね機能　php artisan test --filter=LikeFeatureTest
+9. コメント送信機能　
+10. 商品購入機能　
+11. 支払方法　php artisan test --filter=PaymentMethodTest
+12. 配送先変更機能　php artisan test --filter=ChangeShippingAddressTest
+13. ユーザー情報所得　php artisan test --filter=UserProfileDataTest
+14. ユーザー情報変更　php artisan test --filter=UserProfileEditTest
+15. 出品商品情報登録　php artisan test --filter=ItemRegisterTest(ExhibitionRequestの画像バリデーション  'image' => ['required', 'file', 'mimes:jpeg,png'],を外して、テスト)※テストで実際の画像でないとエラーが出てしまうため
+

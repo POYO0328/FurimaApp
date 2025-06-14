@@ -22,6 +22,7 @@ class ItemRegisterTest extends TestCase
             'category_id' => [1],  // 配列にすることがポイント
             'condition' => '新品',
             'item_name' => 'テスト商品',
+            'brand' => 'サンプルブランド',
             'description' => 'これはテスト用の商品説明です。',
             'price' => 5000,
         ];

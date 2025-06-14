@@ -19,8 +19,12 @@ class PaymentMethodTest extends TestCase
         $item = Item::factory()->create();
 
         $response = $this->post(route('purchase.complete', ['item_id' => $item->id]), [
+            'user_id' => $user->id,
+            'item_id' => $item->id,
             'payment_method' => 'コンビニ支払い',
-            // 他に必要なフォームデータをここに書く
+            'shipping_postal_code' => '123-4567',
+            'shipping_address' => '西新宿1-1-1',
+            'shipping_building' => '新宿ビル101号',
         ]);
 
         $response->assertRedirect('/mypage?page=buy');
@@ -29,6 +33,9 @@ class PaymentMethodTest extends TestCase
             'user_id' => $user->id,
             'item_id' => $item->id,
             'payment_method' => 'コンビニ支払い',
+            'shipping_postal_code' => '123-4567',
+            'shipping_address' => '西新宿1-1-1',
+            'shipping_building' => '新宿ビル101号',
         ]);
     }
 }
