@@ -18,8 +18,7 @@ Laravel 環境構築
 6. php artisan db:seed
 7. composer require stripe/stripe-php
 8. .env ファイル内に STRIPE_SECRET_KEY=（Stripeの管理画面から取得したキー）
-   STRIPE_PUBLIC_KEY=pk_test_51RZd2P2Y9mjawEBNaoGKz6Ko6oP4BFTP9vn7B2LMMpDTVKcujVHngdvd5PcW4RCqftfpqRixLPsOpAjWp6LPNSW000v92w3X51
-   がなければ、追加する
+   STRIPE_PUBLIC_KEY=（Stripeの管理画面から取得したキー）
 
 ## 使用技術
 
