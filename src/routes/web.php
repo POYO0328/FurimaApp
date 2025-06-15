@@ -66,6 +66,6 @@ Route::post('/profile/update', [ProfileController::class, 'update'])->name('prof
 
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/', [ItemController::class, 'index']);
-
 Route::post('/stripe/create-checkout-session', [\App\Http\Controllers\StripeController::class, 'create']);
+
+Route::get('/', [ItemController::class, 'index']);
